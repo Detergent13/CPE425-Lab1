@@ -6,10 +6,11 @@ from Crypto.Cipher import AES, ARC4
 from Crypto.Util.Padding import pad
 from string import ascii_lowercase, digits
 
-MODE = "rc4"
+MODE = "aes"
 ALPHABET = ascii_lowercase + digits
 plaintext = b"this is the wireless security lab"
 
+# From encrypt.py
 aes_ciphertext = b';[\xb5\x90\xb3\x93\x91F\xf6gF)\x11\x0e\xce\xa3\x1a\xb3\x9c\xae~\xb8O3\x9d\x875\x9eV\xe1\xa1\x05p\x8a\x0e|L`\xb7]\xacf|b-\x87\xeao'
 rc4_ciphertext = b'\x14r\xab\x1e\xb7.\x99R\x00Tx\x9d=\x0e\xd2\x91:\x949nO\\\x17P\x13\xca\xca\x9f\xdc\x1ce\xd2^'
 
