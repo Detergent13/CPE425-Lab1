@@ -10,8 +10,15 @@ IV = b"1234567890123456"
 
 # ECB/CTR doesn't use an IV.
 # CBC needs different ciphersuites for encryption and decryption, since the operations mutate state.
-cipher_enc = AES.new(KEY, MODE, IV) if (MODE != AES.MODE_CTR and MODE != AES.MODE_ECB) else AES.new(KEY, MODE)
-cipher_dec = AES.new(KEY, MODE, IV) if (MODE != AES.MODE_CTR and MODE != AES.MODE_ECB) else AES.new(KEY, MODE)
+if MODE == AES.MODE_ECB:
+    cipher_enc = AES.new(KEY, MODE)
+    cipher_dec = AES.new(KEY, MODE)
+elif MODE == AES.MODE_CTR:
+    cipher_enc = AES.new(KEY, MODE, nonce=b"")
+    cipher_dec = AES.new(KEY, MODE, nonce=b"")
+else:
+    cipher_enc = AES.new(KEY, MODE, IV)
+    cipher_dec = AES.new(KEY, MODE, IV)
 
 ciphertext = cipher_enc.encrypt(plaintext)
 
